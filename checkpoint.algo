@@ -1,0 +1,32 @@
+ALGORITHM checkpoint2
+VAR
+    nums : ARRAY_OF INTEGER[];
+    target:INTEGER;
+    indices : ARRAY_OF INTEGER[];
+    i,j,n:INTEGER;
+    
+BEGIN
+
+    // iterations
+    FOR i FROM 0 TO n-1 STEP 1 DO   
+        FOR j FROM i+1 TO n-1 DO
+                // Check if the sum of nums[i] and nums[j] is equal to the target
+                IF (nums[j] == target- nums[i]) 
+                    indices = [i,j]; // Stores the pair of nums equals to the target in indices
+                END IF
+            END FOR
+    END FOR
+    RETURN indices[]; // Returns an empty array if the target is not found in a pair of nums
+END 
+
+
+//I had another idea using 2 nested DO while loops one is fixed to i = 0 the other keeps on iterating j++ 
+// if the pair is not found when j = num.length -1 i should be incremented but i didnt really know how to type it within the code 
+// so i used the other method of substraction 
+
+
+
+
+
+
+
