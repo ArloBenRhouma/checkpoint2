@@ -1,0 +1,74 @@
+ALGORITHM test2
+VAR
+    sentence: STRING;
+
+     // SEARCH procedure
+    PROCEDURE SEARCH(C: CHARACTER, STR: STRING, VAR FIND: BOOLEAN, VAR POS: INTEGER)
+    BEGIN
+        FIND := FALSE;
+        POS := -1;
+
+        FOR VAR i := 0 TO LENGTH(STR) - 1 DO
+        BEGIN
+            IF STR[i] = C THEN
+            BEGIN
+                FIND := TRUE;
+                POS := i;
+                WRITE("C = ", POS);
+                BREAK;
+            END;
+        END;
+    END;
+
+    // Delete procedure
+    PROCEDURE DELETE (C: CHARACTER, STR: STRING, VAR FIND: BOOLEAN)
+    VAR
+        POS: INTEGER;
+    BEGIN
+        SEARCH(C, STR, FIND, POS)
+        IF (FIND = TRUE ) THEN
+            STR := STR [0:POS-1] + STR[POS+1:LENGTH(STR)];
+    END
+
+    // Delete all 
+    PROCEDURE DELETE_ALL (C: CHARACTER, STR: STRING)
+    VAR 
+        FIND: BOOLEAN;
+    BEGIN
+        REPEAT
+            DELETE(C, STR,VAR FIND)
+        UNTIL  FIND:= FALSE;
+    END
+BEGIN 
+    
+    //Mmain program
+    //Reading  the variables 
+    VAR C: CHARACTER := read_character();
+    VAR STR: STRING := read_string();
+    VAR FIND: BOOLEAN;
+    VAR POS: INTEGER;
+
+    //display result
+    SEARCH(C, STR, FIND, POS);
+    WRITE("FIND: ", FIND);
+    WRITE("POS: ", POS);
+
+    DELETE(C, STR, FIND);
+    WRITE("STR after deleting first occurrence: ", STR);
+
+    DELETE_ALL(C, STR);
+    WRITE("STR after deleting all occurrences: ", STR);
+
+END                         
+
+
+
+
+
+
+
+
+
+
+
+END

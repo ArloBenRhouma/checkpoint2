@@ -1,0 +1,38 @@
+ALGORITHM test3
+VAR
+    arr,count,sortedArr:ARRAY;
+    N,K,i:INTEGER;
+
+BEGIN
+    //  Initialization
+    arr := [2, 3, 2, 5, 4, 4, 5];
+    N := LENGTH(arr);
+    K := MAXIMUM(arr); // assuming it returns the max of the array
+    count : ARRAY_OF INTEGER[K+1];
+    FOR i := 0 TO K DO
+        count[i] := 0;
+
+    //Count occurences of each element
+    FOR i := 0 TO N-1 DO
+        count[arr[i]] := count[arr[i]] + 1;
+
+    //Calculate count
+    FOR i := 1 TO K DO
+        count[i] := count[i] + count[i-1];
+    
+    // Create sorted array
+    sortedArr : ARRAY_OF INTEGER[N];;
+    FOR i := N-1 TO 0 step -1 DO
+        BEGIN
+            sortedArr[count[arr[i]]-1] := arr[i];
+            count[arr[i]] := count[arr[i]] - 1;
+        END;
+
+    // Display the sorted array
+    FOR i := 0 TO N-1 DO
+        WRITE(sortedArr[i]);
+
+
+
+
+END

@@ -1,0 +1,67 @@
+ALGORITHM test1
+VAR
+    sentence: STRING;
+    letterCount, digitCount, separatorCount, specialCharCount: INTEGER;
+
+BEGIN
+    // Initialize counts
+    letterCount := 0;
+    digitCount := 0;
+    separatorCount := 0;
+    specialCharCount := 0;
+
+    // returns true if d is a separator and false otherwise
+    function is_separator(d: character): boolean
+    begin
+        if (d in [' ', ',', '.', ';', ':'])
+            return true;
+        else
+            return false;
+    end
+
+    // returns true if d is a letter and false otherwise
+    function is_letter(d: character): boolean
+    begin
+        if (d in ['a'..'z', 'A'..'Z'])
+            return true;
+        else
+            return false;
+    end
+
+    // returns true if d is a digit and false otherwise
+    function is_digit(d: character): boolean
+    begin
+        if (d in [0..9])
+            return true;
+        else
+            return false;
+    end
+
+    // Read the sentence character by character until '#' is there
+    sentence := '';
+    Repeat
+        // Read a character that the user entered
+        var ch := read_character();
+
+        // Check the type of character and increment counts respectively
+        if is_letter(uppercase(ch)) then
+            letterCount := letterCount + 1;
+        else if is_digit(ch) then
+            digitCount := digitCount + 1;
+        else if is_separator(ch) then
+            separatorCount := separatorCount + 1;
+        else
+            specialCharCount := specialCharCount + 1;
+
+        // Append the character to the sentence
+        sentence := sentence + ch;
+
+    Until ch = '#';
+
+    // Display the counts
+    Write ("Sentence: " + sentence);
+    Write ("Number of letters: " + letterCount);
+    Write ("Number of digits: " + digitCount);
+    Write ("Number of separators: " + separatorCount);
+    Write ("Number of special characters: " + specialCharCount);
+END
